@@ -30,9 +30,13 @@ def discretize_data(df):
 
 def run_apriori(df, min_support=0.05, min_confidence=0.6):
 
+    print("Running Apriori with support:", min_support)
+
     freq = apriori(df, min_support=min_support, use_colnames=True)
 
     rules = association_rules(freq, metric="confidence", min_threshold=min_confidence)
+
+    print("Number of rules found:", len(rules))
 
     rules = rules.sort_values(by=['confidence','lift'], ascending=False)
 
